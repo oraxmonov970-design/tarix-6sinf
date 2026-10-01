@@ -1,0 +1,47 @@
+name: Build APK
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - name: Tools
+        run: sudo apt-get update && sudo apt-get install -y librsvg2-bin
+      - name: Web files
+        run: |
+          mkdir -p www
+          cp index.html www/index.html
+      - name: Install and add Android
+        run: |
+          npm install
+          npx cap add android
+      - name: Icon
+        run: |
+          R=android/app/src/main/res
+          for d in mdpi:48 hdpi:72 xhdpi:96 xxhdpi:144 xxxhdpi:192; do
+            n=${d%%:*}; s=${d##*:}
+            for f in ic_launcher ic_launcher_round ic_launcher_foreground; do
+              rsvg-convert -w $s -h $s icon.svg -o $R/mipmap-$n/$f.png
+            done
+          done
+          rm -rf $R/mipmap-anydpi-v26
+      - name: Build
+        run: |
+          npx cap sync android
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Tarix-6sinf-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
