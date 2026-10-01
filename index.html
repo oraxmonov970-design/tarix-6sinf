@@ -13,6 +13,7 @@ html,body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,Se
 header{display:flex;align-items:center;gap:10px;padding:8px 0}
 header svg{width:44px;height:44px;flex:none}
 h1{font-size:1.15rem;margin:0;color:var(--pri)}
+h4{color:var(--pri);margin:1em 0 .3em}
 .sub{font-size:.8rem;opacity:.7}
 .tabs{display:flex;gap:6px;margin:8px 0}
 .tabs button,.btn{flex:1;padding:11px;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:10px;font-size:1rem;cursor:pointer}
@@ -21,6 +22,8 @@ h1{font-size:1.15rem;margin:0;color:var(--pri)}
 .card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;margin:10px 0}
 .topic{display:block;width:100%;text-align:left;margin:8px 0}
 .guide p{margin:.5em 0}
+table{width:100%;border-collapse:collapse;margin:.5em 0}
+td,th{border:1px solid var(--bd);padding:6px;text-align:left}
 input[type=text]{width:100%;padding:11px;font-size:1rem;border:2px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);margin-top:8px}
 .ok{color:var(--ok);font-weight:600}.bad{color:var(--bad);font-weight:600}
 .row{display:flex;gap:8px;margin-top:10px}
@@ -40,28 +43,103 @@ input[type=text]{width:100%;padding:11px;font-size:1rem;border:2px solid var(--b
 <div id="app"></div>
 </div>
 <script>
-const T=[
-{t:"Qadimgi Misr: piramidalar",g:["Qadimgi Misr Nil daryosi vodiysida vujudga kelgan. Nil har yili toshib, dalalarga unumdor loy qoldirgan.","Misr hukmdorlari fir'avnlar deb atalgan. Ular o'limdan keyin ham hayot davom etadi, deb ishonganlar.","Fir'avnlar uchun maxsus maqbaralar — piramidalar qurilgan. Eng mashhuri Xufu (Xeops) piramidasi Giza shahri yaqinida joylashgan.","Murdalar mumiyolangan, ya'ni maxsus usulda saqlangan. Misrliklar iyeroglif yozuvidan foydalanganlar."],
-q:[["Qadimgi Misr ___ daryosi vodiysida vujudga kelgan.","Nil"],["Misr hukmdorlari ___ deb atalgan.","fir'avn|firavn|fir'avnlar|firavnlar"],["Fir'avnlar uchun qurilgan maqbaralar ___ deb ataladi.","piramida|piramidalar"],["Murdani maxsus usulda saqlash ___ deyiladi.","mumiyolash|mumiyo"],["Misrliklarning yozuvi ___ deb atalgan.","iyeroglif|iyeroglif yozuvi"]]},
-{t:"Zardushtiylik va Avesto",g:["Zardushtiylik — qadimgi Markaziy Osiyo va Eron xalqlarining diniy ta'limoti. Uning asoschisi Zardusht (Zaratushtra) hisoblanadi.","Zardushtiylikning muqaddas kitobi Avesto deb ataladi.","Ta'limotga ko'ra, dunyoda ezgulik va yovuzlik o'rtasida kurash boradi. Ezgulik xudosi Axura Mazda, yovuzlik ruhi Axriman deb nomlangan.","Olov zardushtiylar uchun muqaddas hisoblangan, shuning uchun ular olovga sig'inuvchilar deb ham atalgan."],
-q:[["Zardushtiylik ta'limotining asoschisi ___.","Zardusht|Zaratushtra|Zoroastr"],["Zardushtiylarning muqaddas kitobi ___ deb ataladi.","Avesto"],["Ezgulik xudosi ___ deb nomlangan.","Axura Mazda|Ahura Mazda|Ahuramazda"],["Yovuzlik ruhi ___ deb atalgan.","Axriman|Ahriman"],["Zardushtiylar uchun muqaddas hisoblangan narsa ___.","olov"]]},
-{t:"Afina va Sparta",g:["Qadimgi Yunonistonda alohida shahar-davlatlar — polislar mavjud bo'lgan. Eng yirik polislar Afina va Sparta edi.","Afinada demokratiya (xalq hokimiyati) shakllangan. Muhim masalalar xalq majlisida hal qilingan.","Spartada esa harbiy tartib hukmron bo'lgan. Bolalar yoshligidan jangchi qilib tarbiyalangan.","Yunonlar har to'rt yilda Olimpiya o'yinlarini o'tkazganlar. O'yinlar Zevs sharafiga bag'ishlangan."],
-q:[["Qadimgi Yunonistondagi shahar-davlatlar ___ deb atalgan.","polis|polislar"],["Afinada ___ (xalq hokimiyati) shakllangan.","demokratiya"],["Afinada muhim masalalar xalq ___ da hal qilingan.","majlis|majlisi|xalq majlisi"],["Spartada bolalar yoshligidan ___ qilib tarbiyalangan.","jangchi|harbiy"],["Olimpiya o'yinlari har ___ yilda o'tkazilgan.","4|to'rt|turt"]]}
-];
+const T=[];
+
+T.push({t:"1-mavzu. Qadimgi tarix ildizlari",g:`
+<h4>1. Qadimgi dunyo tarixi</h4>
+<p>Yer yuzida odam paydo bo'lganidan milodiy 476-yilda G'arbiy Rim imperiyasi qulaguniga qadar bo'lgan davr. Bu davrda dastlabki jamoalar, xo'jalik, madaniyat, yozuv va davlatlar shakllandi.</p>
+<h4>2. Tarixiy manbalar</h4>
+<p><b>Moddiy manbalar</b> — qadimda inson qo'li bilan yaratilgan narsalar: mehnat qurollari, sopol idishlar, qurol-aslahalar, zeb-ziynatlar.</p>
+<p><b>Yozma manbalar</b> — Behistun yozuvlari, Gerodotning «Tarix», Strabonning «Geografiya» asarlari, Sim Syan asarlari.</p>
+<p>O'rta Osiyo tarixiga oid eng qadimgi yozma manba — «Avesto». Behistun qoyasi yozuvlari Eron hududida joylashgan.</p>
+<h4>3. Tarixni o'rganuvchi olimlar</h4>
+<table><tr><th>Olim</th><th>Sohasi</th></tr>
+<tr><td>Arxeologlar</td><td>Qazishma ishlari</td></tr>
+<tr><td>Antropologlar</td><td>Qadimgi odam qoldiqlari, skeleti, bosh chanog'i</td></tr>
+<tr><td>Etnograflar</td><td>Qadimgi udum, xo'jalik va an'analarni saqlagan xalqlar</td></tr></table>
+<h4>4. Ibtidoiy jamoa</h4>
+<p>Barcha xalqlar tarixi ibtidoiy jamoa tuzumidan boshlangan. Dastlab kishilar alohida guruhlarga birlashgan, keyin urug' jamoalariga bo'lingan. Qarindoshlardan tarkib topgan jamoa urug' deb atalgan.</p>
+<h4>5. Qadimgi yunon tarixchilari</h4>
+<table><tr><th>Tarixchi</th><th>Asari</th><th>Davri</th></tr>
+<tr><td>Gerodot</td><td>«Tarix»</td><td>mil. avv. V asr</td></tr>
+<tr><td>Strabon</td><td>«Geografiya»</td><td>mil. avv. I asr oxiri</td></tr>
+<tr><td>Arrian</td><td>«Aleksandrning harbiy yurishlari»</td><td>milodiy II asr</td></tr></table>
+<p>Uchalasi ham yunon.</p>
+<h4>6. Matriarxat va patriarxat</h4>
+<p>Dastlabki urug' jamoalari ona tevaragida jipslashgan — <b>matriarxat</b>. Mehnat qurollari va xo'jalik yuritish shakllari takomillashgach, yetakchilik erkaklarga o'tgan — <b>patriarxat</b>.</p>
+<h4>7. Tosh davri</h4>
+<p>Dastlabki qurollar toshdan yasalgani uchun shunday atalgan. 4 bosqich: <b>paleolit</b> (qadimgi tosh) → <b>mezolit</b> (o'rta tosh) → <b>neolit</b> (yangi tosh) → <b>eneolit</b> (mis-tosh).</p>
+<p>Atamalar: paleos — qadimgi, mezos — o'rta, neos — yangi, litos — tosh, eneus (lot.) — mis. Eneolit lotin va yunon so'zlaridan tuzilgan.</p>
+<p>Paleolit 3 davrga bo'linadi: ilk, o'rta, so'nggi.</p>
+<h4>8. Muhim faktlar</h4>
+<ul><li>Tik yuruvchi odamlar chaqmoqtosh yordamida olov hosil qilishni o'rgangan.</li>
+<li>Buyuk muzlik ilk paleolit oxirida boshlanib, mezolit boshlanishi bilan tugagan.</li>
+<li>Toshkent vohasidagi mezolit manzilgohi — Qo'shilish.</li></ul>
+`,q:[
+["Milodiy 476-yilda ___ qulaguniga qadar bo'lgan davr qadimgi dunyo tarixi deyiladi.","G'arbiy Rim imperiyasi|g'arbiy rim"],
+["Yer yuzida odam paydo bo'lganidan milodiy 476-yilgacha kechgan voqealar ___ deb ataladi.","Qadimgi dunyo tarixi|qadimgi dunyo"],
+["Qadimgi davrga oid qazishma ishlarini olib boruvchi olimlar ___ deb ataladi.","arxeologlar|arxeolog"],
+["Qadimgi odamlarning suyak qoldiqlari, skeleti va bosh chanog'ini o'rganuvchi olimlar ___ deb ataladi.","antropologlar|antropolog"],
+["Qadimgi udum, xo'jalik va madaniy an'analarni saqlagan xalqlarni o'rganuvchi olimlar ___ deb ataladi.","etnograflar|etnograf"],
+["Mehnat qurollari, sopol idishlar, qurol-aslahalar va zeb-ziynatlar tarixiy ___ manbalarga kiradi.","moddiy"],
+["Behistun yozuvlari, Gerodot, Strabon va Sim Syan asarlari tarixiy ___ manbalarga kiradi.","yozma"],
+["Qadimda inson qo'li bilan yaratilgan barcha narsalar ___ manbalar hisoblanadi.","moddiy"],
+["O'rta Osiyo bo'yicha eng qadimgi yozma manba ___ hisoblanadi.","Avesto"],
+["Behistun qoyasi yozuvlari hozirgi ___ hududida joylashgan.","Eron"],
+["Jahondagi barcha xalqlar tarixi ___ tuzumidan boshlangan.","ibtidoiy jamoa|ibtidoiy jamoa tuzumi"],
+["Insoniyat rivojining dastlabki bosqichida kishilar ___ birlashgan.","alohida guruhlarga|guruhlarga|alohida guruh"],
+["Eng qadimgi odamlarning dastlabki jamoasi ___ deb atalgan.","alohida guruhlar|guruhlar"],
+["Ibtidoiy jamoalar asta-sekin ___ bo'linib bordi.","urug' jamoalariga|urug' jamoalari|urug'"],
+["Qarindoshlardan tarkib topgan jamoa ___ deb atalgan.","urug'|urug' jamoasi"],
+["«Tarix» asarining muallifi ___ hisoblanadi.","Gerodot"],
+["«Aleksandrning harbiy yurishlari» asarini ___ yozgan.","Arrian"],
+["«Geografiya» asarining muallifi ___ hisoblanadi.","Strabon"],
+["Gerodot «Tarix» asarini miloddan avvalgi ___ asrda yozgan.","V|5|beshinchi"],
+["Strabon «Geografiya» asarini miloddan avvalgi ___ asr oxirlarida yozgan.","I|1|birinchi"],
+["Arrian «Aleksandrning harbiy yurishlari» asarini milodiy ___ asrda yozgan.","II|2|ikkinchi"],
+["«Tarix» asarining muallifi Gerodot ___ bo'lgan.","yunon"],
+["«Geografiya» asarining muallifi Strabon ___ bo'lgan.","yunon"],
+["«Aleksandrning harbiy yurishlari» muallifi Arrian ___ bo'lgan.","yunon"],
+["Ona tevaragida jipslashgan dastlabki urug' jamoalari bosqichi ___ deb ataladi.","matriarxat"],
+["Yetakchilikning erkaklarga o'tishiga mehnat qurollari va ___ shakllarining takomillashuvi sabab bo'lgan.","xo'jalik yuritish|xo'jalik"],
+["Yetakchilik erkaklar qo'liga o'tgan davr ___ deb ataladi.","patriarxat"],
+["Urug'dosh jamoalarni erkaklar boshqargan davr ___ deb ataladi.","patriarxat"],
+["Dastlabki mehnat qurollari asosan toshdan yasalgani uchun bu davr ___ deb atalgan.","Tosh davri|tosh"],
+["Tosh davri ___ ta asosiy bosqichga bo'linadi.","4|to'rt"],
+["Tosh davri bosqichlari ketma-ketligi: ___, ___, ___, ___.","paleolit, mezolit, neolit, eneolit"],
+["«Paleolit» atamasi ___ tosh davri degan ma'noni anglatadi.","qadimgi"],
+["«Mezolit» atamasi ___ tosh davri degan ma'noni anglatadi.","o'rta"],
+["«Neolit» atamasi ___ tosh davri degan ma'noni anglatadi.","yangi"],
+["«Eneolit» atamasi ___ tosh davri degan ma'noni anglatadi.","mis-tosh|mis tosh"],
+["«Paleolit» so'zidagi «paleos» — ___ degan ma'noni anglatadi.","qadimgi"],
+["«Mezolit» so'zidagi «mezos» — ___ degan ma'noni anglatadi.","o'rta"],
+["«Neolit» so'zidagi «neos» — ___ degan ma'noni anglatadi.","yangi"],
+["«Eneolit» so'zidagi lotincha «eneus» — ___ degan ma'noni anglatadi.","mis"],
+["Lotincha va yunoncha so'zlar qo'shilishidan hosil bo'lgan tosh davri atamasi ___ hisoblanadi.","eneolit"],
+["Paleolit davri ___ ta asosiy bosqichga bo'linadi.","3|uch"],
+["Paleolitning asosiy bosqichlari ___, ___ va ___ davrlardan iborat.","ilk, o'rta, so'nggi"],
+["«Tik yuruvchi odamlar» chaqmoqtosh yordamida ___ hosil qilishni o'rgangan.","olov"],
+["Buyuk muzlik davri ___ oxirida boshlangan.","ilk paleolit"],
+["Buyuk muzlik davri ___ davrining boshlanishi bilan poyoniga yetgan.","mezolit"],
+["Toshkent vohasida ___ davriga oid Qo'shilish manzilgohi joylashgan.","mezolit"]
+]});
+
+// ===== YANGI MAVZULARNI SHU QATORDAN YUQORIGA QO'SHING =====
+
 const app=document.getElementById('app');let M='s';
-const norm=s=>s.toLowerCase().replace(/[ʻʼ’‘`´]/g,"'").replace(/\s+/g,' ').trim();
+const norm=s=>s.toLowerCase().replace(/[ʻʼ’‘`´]/g,"'").replace(/,/g,' ').replace(/\s+/g,' ').trim();
 function mode(m){M=m;t1.className=m=='s'?'on':'';t2.className=m=='t'?'on':'';home()}
-function home(){app.innerHTML=T.map((x,i)=>`<button class="btn topic" onclick="open_(${i})">${i+1}. ${x.t}</button>`).join('')}
-function open_(i){const x=T[i];let h=`<div class="card guide"><h3>${x.t}</h3>${x.g.map(p=>`<p>${p}</p>`).join('')}</div>`;
-if(M=='t'){h+=`<div class="card key"><b>Test savollari va javoblar kaliti</b><ol>${x.q.map(q=>`<li>${q[0]}<br><span class="ok">${q[1].split('|')[0]}</span></li>`).join('')}</ol></div>`;h+=`<button class="btn" onclick="home()">← Orqaga</button>`}
+function home(){app.innerHTML=T.map((x,i)=>`<button class="btn topic" onclick="open_(${i})">${x.t}</button>`).join('')}
+function open_(i){const x=T[i];let h=`<div class="card guide"><h3>${x.t}</h3>${x.g}</div>`;
+if(M=='t'){h+=`<div class="card key"><b>Savollar va javoblar kaliti</b><ol>${x.q.map(q=>`<li>${q[0]}<br><span class="ok">${q[1].split('|')[0]}</span></li>`).join('')}</ol></div><button class="btn" onclick="home()">← Orqaga</button>`}
 else{h+=`<div class="row"><button class="btn" onclick="home()">← Orqaga</button><button class="btn p" onclick="test(${i})">Testni boshlash</button></div>`}
 app.innerHTML=h;scrollTo(0,0)}
-function test(i){const x=T[i];let n=0,sc=0,ans=false;
-function show(){if(n>=x.q.length){app.innerHTML=`<div class="card"><h3>Natija</h3><p>${sc} / ${x.q.length}</p></div><div class="row"><button class="btn" onclick="home()">Mavzular</button><button class="btn p" onclick="test(${i})">Qayta</button></div>`;return}
-ans=false;app.innerHTML=`<div class="card"><div class="sub">${n+1} / ${x.q.length}</div><p>${x.q[n][0]}</p><input type="text" id="a" autocomplete="off" placeholder="Javobingiz"><div id="r"></div></div><div class="row"><button class="btn p" id="b">Tekshirish</button></div>`;
+function test(i){const x=T[i];const qs=[...x.q].sort(()=>Math.random()-.5);let n=0,sc=0,ans=false;
+function show(){if(n>=qs.length){app.innerHTML=`<div class="card"><h3>Natija</h3><p>${sc} / ${qs.length}</p></div><div class="row"><button class="btn" onclick="home()">Mavzular</button><button class="btn p" onclick="test(${i})">Qayta</button></div>`;return}
+ans=false;app.innerHTML=`<div class="card"><div class="sub">${n+1} / ${qs.length}</div><p>${qs[n][0]}</p><input type="text" id="a" autocomplete="off" placeholder="Javobingiz"><div id="r"></div></div><div class="row"><button class="btn p" id="b">Tekshirish</button></div>`;
 const a=document.getElementById('a'),b=document.getElementById('b');a.focus();
-function go(){if(!ans){const ok=x.q[n][1].split('|').some(v=>norm(v)==norm(a.value));if(ok)sc++;ans=true;a.disabled=true;
-document.getElementById('r').innerHTML=ok?'<p class="ok">To\'g\'ri!</p>':`<p class="bad">Noto'g'ri. Javob: ${x.q[n][1].split('|')[0]}</p>`;b.textContent=n+1<x.q.length?'Keyingisi':'Natijani ko\'rish'}else{n++;show()}}
+function go(){if(!ans){const ok=qs[n][1].split('|').some(v=>norm(v)==norm(a.value));if(ok)sc++;ans=true;a.disabled=true;
+document.getElementById('r').innerHTML=ok?'<p class="ok">To\'g\'ri!</p>':`<p class="bad">Noto'g'ri. Javob: ${qs[n][1].split('|')[0]}</p>`;b.textContent=n+1<qs.length?'Keyingisi':'Natijani ko\'rish'}else{n++;show()}}
 b.onclick=go;a.onkeydown=e=>{if(e.key=='Enter')go()}}
 show()}
 home();
